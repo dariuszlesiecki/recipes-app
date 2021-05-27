@@ -1,19 +1,30 @@
 package com.wat.recipesapp;
 
+import com.wat.recipesapp.oauth.CustomOAuth2User;
 import com.wat.recipesapp.oauth.CustomOAuth2UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.ApplicationContextAware;
+import com.wat.recipesapp.user.UserService;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    public WebSecurityConfig(CustomOAuth2UserService oauthUserService, UserService userService) {
+        this.oauthUserService = oauthUserService;
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,11 +41,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .loginPage("/login")
                 .userInfoEndpoint()
-                .userService(userService);
+                .userService(oauthUserService)
+                .and()
+                .successHandler((request, response, authentication) -> {
+
+                    CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+
+                    userService.processOAuthPostLogin(oauthUser.getEmail());
+                    System.out.println(oauthUser.getEmail());
+
+                    response.sendRedirect("/home");
+                });
     }
 
-    @Autowired
-    private CustomOAuth2UserService userService;
+    private final CustomOAuth2UserService oauthUserService;
+
+    private final UserService userService;
 }
 
 /*
