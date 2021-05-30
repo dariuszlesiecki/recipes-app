@@ -16,12 +16,9 @@ spring:
     oauth2:
       client:
         registration:
-          github:
-            clientId: 6745e625c7801b71fd17
-            clientSecret: 7875f3020f80d97f5a63917a45968bc6eafc8f1f
-            scope:
-              - user:email
-              - read:user
+          google:
+            clientId: 104671108097-vrqaepmstr7eisq1qsh550bq7lek1dck.apps.googleusercontent.com
+            clientSecret: JhgXIOttE3LCG_5M4tcUrPtU
           facebook:
             clientId: 305411277731406
             clientSecret: 1f783a0553c9fbdcd9c668d233bca787

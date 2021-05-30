@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="ISO-8859-1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-register page
+<div class="container text-center">
+    <div>
+        <h1>User Registration - Sign Up</h1>
+    </div>
+    <form method="post" th:action="@{/user/register}" th:object="${userDTO}" style="max-width: 400px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-4 col-form-label">E-mail: </label>
+                <div class="col-8">
+                    <input type="text"  class="form-control" name="email" th:value="*{email}" th:errorClass="is-invalid" required/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Password: </label>
+                <div class="col-8">
+                    <input type="password"  class="form-control" name="password" th:value="*{password}" th:errorClass="is-invalid" required minlength="6"/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Re-enter password: </label>
+                <div class="col-8">
+                    <input type="password"  class="form-control" name="rpassword" th:value="*{rpassword}" th:errorClass="is-invalid" required minlength="6"/>
+                    <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}"> </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>
