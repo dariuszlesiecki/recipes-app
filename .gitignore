@@ -1,4 +1,6 @@
 HELP.md
+recipes.mv.db
+recipes.trace.db
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

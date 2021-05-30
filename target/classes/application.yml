@@ -1,6 +1,8 @@
 spring:
   datasource:
     url: "jdbc:h2:file:./recipes"
+
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,12 +16,9 @@ spring:
     oauth2:
       client:
         registration:
-          github:
-            clientId: 20451036798bd6de40f5
-            clientSecret: 55a3fbcc7037924137b214f53f6c2dc5248c4c45
-            scope:
-              - user:email
-              - read:user
+          google:
+            clientId: 104671108097-vrqaepmstr7eisq1qsh550bq7lek1dck.apps.googleusercontent.com
+            clientSecret: JhgXIOttE3LCG_5M4tcUrPtU
           facebook:
             clientId: 305411277731406
             clientSecret: 1f783a0553c9fbdcd9c668d233bca787
