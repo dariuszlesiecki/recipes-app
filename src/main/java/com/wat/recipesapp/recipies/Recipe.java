@@ -1,35 +1,75 @@
 package com.wat.recipesapp.recipies;
 
-import com.sun.istack.NotNull;
-import com.wat.recipesapp.user.AuthProvider;
-import com.wat.recipesapp.user.User;
-
 import javax.persistence.*;
 
 @Entity(name = "Recipies")
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
-    private String desciption;
-    //To bedzie w przypadku, jesli nie powiazemy many to one
-    @NotNull
+    private String title;
+    private String description;
     private Long userId;
-    //private String image;
+    private String author;
 
-
-    public Recipe(String desciption, Long userId) {
-        this.desciption = desciption;
+    public Recipe(String title, String desciption, Long userId, String author) {
+        this.title = title;
+        this.description = desciption;
         this.userId = userId;
+        this.author = author;
     }
 
     public Recipe() {
     }
-    //tutaj ma byc w join column nazwa kolumny, po ktorej laczymy fo userow
-    // , ja nwm jak ta kolumna sie nazywa
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "ID")
-//    private User user;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String desciption) {
+        this.description = desciption;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
 }

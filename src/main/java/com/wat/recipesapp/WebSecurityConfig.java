@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
@@ -52,14 +53,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/oauth2/**").permitAll()
-                .antMatchers("/", "/login","/user/register","/resources/**", "/static/**","/webjars/**").permitAll()
+                .antMatchers( "/login","/user/register","/resources/**", "/static/**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/home")
-                //.successForwardUrl("/home")
+                .defaultSuccessUrl("/")
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .and()
@@ -72,11 +72,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                     OAuth2User u = (OAuth2User) authentication.getPrincipal();
                     String email = u.getAttribute("email");
-                    System.out.println(u.getAttributes());
-                    System.out.println(email);
+                    //System.out.println(u.getAttributes());
+                    //System.out.println(email);
                     userService.processOAuthPostLogin(email);
 
-                    response.sendRedirect("/home");
+                    response.sendRedirect("/");
                 });
     }
 

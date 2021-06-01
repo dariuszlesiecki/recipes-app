@@ -19,6 +19,9 @@ spring:
           google:
             clientId: 104671108097-vrqaepmstr7eisq1qsh550bq7lek1dck.apps.googleusercontent.com
             clientSecret: JhgXIOttE3LCG_5M4tcUrPtU
+            scope:
+              - profile
+              - email
           facebook:
             clientId: 305411277731406
             clientSecret: 1f783a0553c9fbdcd9c668d233bca787

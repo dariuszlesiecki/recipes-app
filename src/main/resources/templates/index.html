@@ -1,9 +1,25 @@
 <!doctype html>
-<html>
-<head>
-    <title>Spring Security</title>
-</head>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - Home')" />
 <body>
-<h3><a href="/home">log in</a></h3>
+<div th:replace="fragments :: header"></div>
+<div class="container">
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recipe : ${listRecipes}">
+        <td ><a th:href="@{'recipe/' + ${recipe.id}}" th:text="${recipe.title}"></a></td>
+        <td th:text="${recipe.description}"></td>
+        <td><a th:href="@{'user/' + ${recipe.userId}}" th:text="${recipe.author}"></a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
 </body>
 </html>

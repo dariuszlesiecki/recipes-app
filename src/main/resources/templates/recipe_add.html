@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - add recipe')" />
+<body>
+<div th:replace="fragments :: header"></div>
+<div>
+
+</div>
+<div class="container text-center">
+<form method="post" th:action="@{/recipe/add}" th:object="${recipe}">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter your recipe's title" th:value="*{title}" th:errorClass="is-invalid" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Example textarea</label>
+        <textarea class="form-control" id="description" name="description" rows="3" th:value="*{description}" th:errorClass="is-invalid" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+</body>
+</html>

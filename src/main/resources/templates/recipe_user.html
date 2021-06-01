@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - your recipes')" />
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="container">
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+        </thead>
+        <tbody>
+        <tr th:each="recipe : ${listRecipes}">
+            <td th:text="${recipe.title}">Title</td>
+            <td th:text="${recipe.description}">Description</td>
+            <td th:text="${recipe.author}">Author</td>
+            <td th:if="${canEdit}">
+                <a th:href="@{'recipe/edit/' + ${recipe.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:href="@{'recipe/delete/' + ${recipe.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
