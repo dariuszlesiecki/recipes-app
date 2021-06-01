@@ -41,7 +41,7 @@ public class UserService {
             repo.save(newUser);
         }
         else {
-            System.out.println(email+"-user already exists");
+            //System.out.println(email+"-user already exists");
         }
     }
 

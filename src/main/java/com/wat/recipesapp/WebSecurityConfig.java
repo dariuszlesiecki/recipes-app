@@ -60,7 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .defaultSuccessUrl("/")
-                //.successForwardUrl("/home")
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .and()
@@ -73,8 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                     OAuth2User u = (OAuth2User) authentication.getPrincipal();
                     String email = u.getAttribute("email");
-                    System.out.println(u.getAttributes());
-                    System.out.println(email);
+                    //System.out.println(u.getAttributes());
+                    //System.out.println(email);
                     userService.processOAuthPostLogin(email);
 
                     response.sendRedirect("/");

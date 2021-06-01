@@ -5,12 +5,10 @@ import com.wat.recipesapp.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class RecipeController {
@@ -39,17 +37,11 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    /*
-    @RequestMapping("/list")
-    public String viewHomePage(Model model) {
-        List<Recipe> listProducts = recipeService.findAll();
-        model.addAttribute("listProducts", listProducts);
-
-        return "products";
+    @RequestMapping("/recipe/{id}")
+    public String details(Model model, @PathVariable(name = "id") Long id){
+        Recipe recipe = recipeService.findById(id).orElseThrow(IllegalArgumentException::new);
+        model.addAttribute("recipe",recipe);
+        return "recipe";
     }
-*/
-
-
-
 
 }

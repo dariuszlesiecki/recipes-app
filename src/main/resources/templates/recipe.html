@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - your recipes')" />
+<body>
+<div th:replace="fragments :: header"></div>
+<div class="container">
+    <div th:text="${recipe.title}"></div>
+    <div th:text="${recipe.description}"></div>
+</div>
+</body>
+</html>

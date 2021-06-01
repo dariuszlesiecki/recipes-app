@@ -14,9 +14,9 @@
     </thead>
     <tbody>
     <tr th:each="recipe : ${listRecipes}">
-        <td th:text="${recipe.title}">Title</td>
-        <td th:text="${recipe.description}">Description</td>
-        <td th:text="${recipe.author}">Author</td>
+        <td ><a th:href="@{'recipe/' + ${recipe.id}}" th:text="${recipe.title}"></a></td>
+        <td th:text="${recipe.description}"></td>
+        <td><a th:href="@{'user/' + ${recipe.userId}}" th:text="${recipe.author}"></a></td>
     </tr>
     </tbody>
 </table>

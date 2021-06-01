@@ -12,7 +12,7 @@
             <td th:text="${recipe.title}">Title</td>
             <td th:text="${recipe.description}">Description</td>
             <td th:text="${recipe.author}">Author</td>
-            <td>
+            <td th:if="${canEdit}">
                 <a th:href="@{'recipe/edit/' + ${recipe.id}}">Edit</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a th:href="@{'recipe/delete/' + ${recipe.id}}">Delete</a>
