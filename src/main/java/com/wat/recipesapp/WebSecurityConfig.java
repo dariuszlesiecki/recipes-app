@@ -52,13 +52,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/oauth2/**").permitAll()
-                .antMatchers("/", "/login","/user/register","/resources/**", "/static/**","/webjars/**").permitAll()
+                .antMatchers( "/login","/user/register","/resources/**", "/static/**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/")
                 //.successForwardUrl("/home")
                 .and()
                 .logout().logoutSuccessUrl("/")
@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     System.out.println(email);
                     userService.processOAuthPostLogin(email);
 
-                    response.sendRedirect("/home");
+                    response.sendRedirect("/");
                 });
     }
 

@@ -21,6 +21,10 @@ public class UserService {
         return repo.existsByEmail(email);
     }
 
+    public User findByEmail(String email){
+        return repo.findByEmail(email);
+    }
+
 
     public void register(UserDTO userDTO){
         User user = new User();
@@ -28,8 +32,6 @@ public class UserService {
         user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
         repo.save(user);
     }
-
-
 
     public void processOAuthPostLogin(String email) {
         if (!repo.existsByEmail(email)) {

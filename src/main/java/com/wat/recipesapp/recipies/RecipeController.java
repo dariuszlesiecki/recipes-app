@@ -1,41 +1,53 @@
 package com.wat.recipesapp.recipies;
 
-import com.wat.recipesapp.common.exception.NotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import com.wat.recipesapp.user.User;
+import com.wat.recipesapp.user.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import javax.validation.Valid;
 
-@RestController
-@RequestMapping("/recipies")
+@Controller
 public class RecipeController {
-    public RecipeController(RecipeStorage recipeStorage) {
-        this.recipeStorage = recipeStorage;
+
+    private final RecipeService recipeService;
+    private final UserService userService;
+
+    public RecipeController(RecipeService recipeService, UserService userService) {
+        this.recipeService = recipeService;
+        this.userService = userService;
     }
 
-    private final RecipeStorage recipeStorage;
-
-    @GetMapping
-    public List<Recipe> findAll(){
-        return recipeStorage.findAll();
+    @GetMapping("/recipe/add")
+    public String addRecipe(@ModelAttribute Recipe recipe, Model model){
+        model.addAttribute("recipe",recipe);
+        return "recipe_add";
     }
 
+    @PostMapping("/recipe/add")
+    public String saveRecipe(@Valid Recipe recipe, Authentication authentication) {
+        User currentUser = userService.findByEmail(authentication.getName());
+        recipe.setUserId(currentUser.getId());
+        recipeService.save(recipe);
 
-    @GetMapping("/{id}")
-    public Recipe findById(@PathVariable long id){
-        final Recipe recipe = recipeStorage.findById(id).orElseThrow(
-                () -> new NotFoundException("Recipe does not exist"));
-        return recipe;
-    }
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Recipe createRecipe(@RequestBody Recipe request){
-        return recipeStorage.createOrUpdateRecipe(request);
+        return "redirect:/";
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void deleteRecipe(@PathVariable long id){ recipeStorage.removeRecipe(id);}
+    /*
+    @RequestMapping("/list")
+    public String viewHomePage(Model model) {
+        List<Recipe> listProducts = recipeService.findAll();
+        model.addAttribute("listProducts", listProducts);
+
+        return "products";
+    }
+*/
+
 
 
 

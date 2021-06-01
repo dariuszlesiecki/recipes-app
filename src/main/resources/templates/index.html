@@ -1,9 +1,7 @@
 <!doctype html>
-<html>
-<head>
-    <title>Spring Security</title>
-</head>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - Home')" />
 <body>
-<h3><a href="/home">log in</a></h3>
+<div th:replace="fragments :: header"></div>
 </body>
 </html>

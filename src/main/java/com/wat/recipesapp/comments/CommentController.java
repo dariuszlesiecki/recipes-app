@@ -1,8 +1,5 @@
 package com.wat.recipesapp.comments;
 
-import com.wat.recipesapp.common.exception.NotFoundException;
-import com.wat.recipesapp.recipies.Recipe;
-import com.wat.recipesapp.recipies.RecipeStorage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
