@@ -13,6 +13,7 @@ public class RecipeService {
     private final RecipeRepository recipeRepository;
 
     public List<Recipe> findAll() { return  recipeRepository.findAll(); }
+    public List<Recipe> findAllByAuthor(String author) {return recipeRepository.findAllByAuthor(author); }
     public Optional<Recipe> findById(long id) { return recipeRepository.findById(id); }
     public void removeRecipe(long id){ recipeRepository.deleteById(id);}
     public Recipe createOrUpdateRecipe(Recipe recipe){ return  recipeRepository.save(recipe);}

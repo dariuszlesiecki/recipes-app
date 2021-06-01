@@ -13,9 +13,11 @@
 <body>
 <th:block th:fragment="header">
     <div sec:authorize="isAuthenticated()" class="text-center p-3">
+        <a th:href="@{/}">Home</a><br>
+        <a th:href="@{/recipe/add}">Add recipe</a>
+        <a th:href="@{/profile}">My profile</a>
         <form th:action="@{/logout}" method="post">
             Welcome <b><span sec:authentication="name">Username</span></b>
-            &nbsp;
             <input type="submit" value="Logout" />
         </form>
     </div>

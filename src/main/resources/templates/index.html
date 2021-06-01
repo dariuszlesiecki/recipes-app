@@ -3,5 +3,23 @@
 <head th:replace="fragments :: html_head(pageTitle='Recipes App - Home')" />
 <body>
 <div th:replace="fragments :: header"></div>
+<div class="container">
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recipe : ${listRecipes}">
+        <td th:text="${recipe.title}">Title</td>
+        <td th:text="${recipe.description}">Description</td>
+        <td th:text="${recipe.author}">Author</td>
+    </tr>
+    </tbody>
+</table>
+</div>
 </body>
 </html>

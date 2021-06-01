@@ -1,7 +1,5 @@
 package com.wat.recipesapp.recipies;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 
 @Entity(name = "Recipies")
@@ -13,11 +11,13 @@ public class Recipe {
     private String title;
     private String description;
     private Long userId;
+    private String author;
 
-    public Recipe(String title, String desciption, Long userId) {
+    public Recipe(String title, String desciption, Long userId, String author) {
         this.title = title;
         this.description = desciption;
         this.userId = userId;
+        this.author = author;
     }
 
     public Recipe() {
@@ -53,6 +53,14 @@ public class Recipe {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override

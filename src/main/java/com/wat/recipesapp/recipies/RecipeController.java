@@ -33,6 +33,7 @@ public class RecipeController {
     public String saveRecipe(@Valid Recipe recipe, Authentication authentication) {
         User currentUser = userService.findByEmail(authentication.getName());
         recipe.setUserId(currentUser.getId());
+        recipe.setAuthor(currentUser.getEmail());
         recipeService.save(recipe);
 
         return "redirect:/";
