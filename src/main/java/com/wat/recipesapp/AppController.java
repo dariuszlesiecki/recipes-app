@@ -36,8 +36,6 @@ public class AppController {
     public String myRecipes(Authentication authentication){
         User currentUser = userService.findByEmail(authentication.getName());
         Long id = currentUser.getId();
-        //model.addAttribute("canEdit",true);
-
         return "redirect:/user/"+id;
     }
 
