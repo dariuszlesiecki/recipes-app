@@ -16,7 +16,6 @@ public class RecipeService {
     public List<Recipe> findAllByAuthor(String author) {return recipeRepository.findAllByAuthor(author); }
     public List<Recipe> findAllByUserId(Long id) { return recipeRepository.findAllByUserId(id); }
     public Optional<Recipe> findById(long id) { return recipeRepository.findById(id); }
-    public void removeRecipe(long id){ recipeRepository.deleteById(id);}
-    public Recipe createOrUpdateRecipe(Recipe recipe){ return  recipeRepository.save(recipe);}
+    public void delete(long id){ recipeRepository.deleteById(id);}
     public void save(Recipe recipe){recipeRepository.save(recipe);}
 }
