@@ -1,5 +1,7 @@
 package com.wat.recipesapp.recipies;
 
+import com.wat.recipesapp.comments.Comment;
+import com.wat.recipesapp.comments.CommentService;
 import com.wat.recipesapp.user.User;
 import com.wat.recipesapp.user.UserService;
 import org.springframework.security.core.Authentication;
@@ -8,16 +10,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class RecipeController {
 
     private final RecipeService recipeService;
     private final UserService userService;
+    private final CommentService commentService;
 
-    public RecipeController(RecipeService recipeService, UserService userService) {
+    public RecipeController(RecipeService recipeService, UserService userService, CommentService commentService) {
         this.recipeService = recipeService;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/recipe/add")
@@ -58,9 +63,13 @@ public class RecipeController {
     }
 
     @RequestMapping("/recipe/{id}")
-    public String recipeDetails(Model model, @PathVariable(name = "id") Long id){
+    public String recipeDetails(Model model, @PathVariable(name = "id") Long id, @ModelAttribute Comment comment){
         Recipe recipe = recipeService.findById(id).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("recipe",recipe);
+
+        List<Comment> comments = commentService.findAllByRecipeId(id);
+        model.addAttribute("comments",comments);
+        model.addAttribute("comment",comment);
         return "recipe";
     }
 
