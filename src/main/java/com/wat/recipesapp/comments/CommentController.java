@@ -1,32 +1,29 @@
 package com.wat.recipesapp.comments;
 
-import org.springframework.http.HttpStatus;
+import com.wat.recipesapp.user.User;
+import com.wat.recipesapp.user.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/comments")
+@Controller
 public class CommentController {
-    public CommentController(CommentStorage commentStorage) {
-        this.commentStorage = commentStorage;
+    private final CommentService commentService;
+    private final UserService userService;
+
+    public CommentController(CommentService commentService, UserService userService) {
+        this.commentService = commentService;
+        this.userService = userService;
     }
 
-    private final CommentStorage commentStorage;
-
-
-    @GetMapping("/{id}")
-    public List<Comment> findByRecipeId(@PathVariable long id){
-       return commentStorage.findByRecipeId(id);
+    @RequestMapping("/comment/{recipeId}/add")
+    public String addComment(@PathVariable(name = "recipeId") Long recipeId, Comment comment, Authentication authentication){
+        User currentUser = userService.findByEmail(authentication.getName());
+        comment.setUserId(currentUser.getId());
+        comment.setAuthor(currentUser.getEmail());
+        comment.setRecipeId(recipeId);
+        commentService.save(comment);
+        return "redirect:/recipe/"+recipeId;
     }
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Comment createRecipe(@RequestBody Comment request){
-        return commentStorage.createOrUpdateComment(request);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable long id){ commentStorage.removeComment(id);}
 
 }
