@@ -17,7 +17,9 @@ public class CommentController {
     }
 
     @RequestMapping("/comment/{recipeId}/add")
-    public String addComment(@PathVariable(name = "recipeId") Long recipeId, Comment comment, Authentication authentication){
+    public String addComment(@PathVariable(name = "recipeId") Long recipeId,
+                             Comment comment,
+                             Authentication authentication){
         User currentUser = userService.findByEmail(authentication.getName());
         comment.setUserId(currentUser.getId());
         comment.setAuthor(currentUser.getEmail());
