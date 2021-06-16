@@ -28,13 +28,15 @@ public class UserController {
     }
 
     @GetMapping("/user/register")
-    public String register(@ModelAttribute UserDTO userDTO, Model model) {
+    public String register(@ModelAttribute UserDTO userDTO,
+                           Model model) {
         model.addAttribute("userDTO", userDTO);
         return "register";
     }
 
     @PostMapping("/user/register")
-    public String save(@Valid UserDTO userDTO, BindingResult bindingResult) {
+    public String save(@Valid UserDTO userDTO,
+                       BindingResult bindingResult) {
         if(userService.existsByEmail(userDTO.getEmail())){
             bindingResult.addError(new FieldError("userDTO","email","Email address already in use"));
         }
@@ -52,7 +54,9 @@ public class UserController {
     }
 
     @RequestMapping("/user/{id}")
-    public String usersRecipes(Model model, @PathVariable(name = "id")Long id, Authentication authentication){
+    public String usersRecipes(Model model,
+                               @PathVariable(name = "id")Long id,
+                               Authentication authentication){
         Long currentUserId = userService.findByEmail(authentication.getName()).getId();
         boolean canEdit = currentUserId.equals(id);
 

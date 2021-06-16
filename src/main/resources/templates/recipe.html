@@ -5,15 +5,25 @@
 <div th:replace="fragments :: header"></div>
 <div class="container">
     <div th:text="${recipe.title}"></div>
+    <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}" />
     <div th:text="${recipe.description}"></div>
+
 </div>
 <div class="container mt-5">
     <div class="d-flex justify-content-center row">
         <div class="col-md-8">
             <div class="d-flex flex-column comment-section">
+                <div class="bg-light p-2">
+                    <form method="post" th:action="@{'/comment/'+ ${recipe.id} +'/add'}" th:object="${comment}">
+                        <div class="d-flex flex-row align-items-start">
+                            <textarea class="form-control ml-1 shadow-none textarea"id="content" name="content" rows="3" th:value="*{content}" th:errorClass="is-invalid" required></textarea></div>
+                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button></div>
+                    </form>
+                </div>
+
                 <div class="bg-white p-2">
                     <div th:each="comment: ${comments}">
-                        <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-row user-info">
                             <div class="d-flex flex-column justify-content-start ml-2">
                                 <span class="d-block font-weight-bold name" ><a th:href="@{'/user/' + ${comment.userId}}" th:text="${comment.author}"></a></span>
                                 <span class="date text-black-50"th:text="${comment.created}"></span>
@@ -25,13 +35,7 @@
                     </div>
                 </div>
 
-                <div class="bg-light p-2">
-                    <form method="post" th:action="@{'/comment/'+ ${recipe.id} +'/add'}" th:object="${comment}">
-                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                        <textarea class="form-control ml-1 shadow-none textarea"id="content" name="content" rows="3" th:value="*{content}" th:errorClass="is-invalid" required></textarea></div>
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button></div>
-                    </form>
-                </div>
+
             </div>
         </div>
     </div>

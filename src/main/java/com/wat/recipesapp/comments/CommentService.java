@@ -14,5 +14,5 @@ public class CommentService {
 
     public List<Comment> findAllByRecipeId(long id){ return commentRepository.findAllByRecipeId(id);}
     public void save(Comment comment){commentRepository.save(comment);}
-    public void remove(long id){ commentRepository.deleteById(id);}
+    public void deleteById(long id){ commentRepository.deleteById(id);}
 }
