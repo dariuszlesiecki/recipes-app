@@ -3,14 +3,30 @@
 <head th:replace="fragments :: html_head(pageTitle='Recipes App - recipe details')" />
 <body>
 <div th:replace="fragments :: header"></div>
-<div class="container">
-    <div th:text="${recipe.title}"></div>
-    <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}" />
-    <div th:text="${recipe.description}"></div>
+<div class="container" style="text-align: center;">
+    <div>
+        <div style="background-color: lightgreen; padding: 2% 25% 2% 25%; border: 2px solid darkblue;
+             border-radius: 25px; margin-bottom: 2%">
+            <div><h2>Title</h2></div>
+            <div  th:text="${recipe.title}" ></div>
+            <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}" />
+        </div>
+
+    </div>
+
+    <div style="background-color: lightgreen; padding: 2% 25% 2% 25%; border: 2px solid darkblue;
+             border-radius: 25px;">
+        <div><h2>Description</h2></div>
+        <div th:text="${recipe.description}"></div>
+    </div>
+
 
 </div>
-<div class="container mt-5">
+<div class="container mt-5" style="background-color: powderblue; padding: 5%; border: 2px solid darkblue;
+             border-radius: 25px;">
+    <h2 style="text-align: center">Post Comment</h2>
     <div class="d-flex justify-content-center row">
+
         <div class="col-md-8">
             <div class="d-flex flex-column comment-section">
                 <div class="bg-light p-2">
