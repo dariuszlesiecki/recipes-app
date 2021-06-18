@@ -6,21 +6,22 @@
 <div>
 
 </div>
-<div class="container text-center">
+<div style="background-color: powderblue; padding: 5%; border: 2px solid darkblue;
+             border-radius: 25px;" class="container text-center">
 <form method="post" enctype="multipart/form-data" th:action="@{'/recipe/' + ${recipe.id} + '/edit'}" th:object="${recipe}">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" th:text="*{title}" th:value="*{title}" th:errorClass="is-invalid" required>
+    <div class="form-group" style="padding-bottom: 3%" >
+        <label for="title"><h2>Title</h2></label>
+        <input type="text" class="form-control" id="title" name="title"  th:value="*{title}" th:errorClass="is-invalid" required>
     </div>
-    <div class="form-group">
-        <label for="description">Description</label>
+    <div class="form-group" style="padding-bottom: 3%" >
+        <label for="description"><h2>Description</h2></label>
         <textarea class="form-control" id="description" name="description" rows="3" th:text="*{description}" th:value="*{description}" th:errorClass="is-invalid" required></textarea>
     </div>
-    <div class="form-group">
-        <label>Photo</label>
+    <div class="form-group" style="padding-bottom: 3%" >
+        <label><h2>Photo</h2></label>
         <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg" th:value="*{pic}" required/>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary" style="width: 300px">Save</button>
 </form>
 </div>
 </body>

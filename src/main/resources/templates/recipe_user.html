@@ -13,8 +13,23 @@
             <td th:text="${recipe.description}">Description</td>
             <td th:text="${recipe.author}">Author</td>
             <td th:if="${canEdit}">
-                <a th:href="@{'/recipe/' + ${recipe.id} + '/edit'}">Edit</a>
-                <a th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a>
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-sm" style="text-align: center">
+                            <form th:action="@{'/recipe/' + ${recipe.id} + '/edit'}" method="get">
+                                <input type="submit" class="btn btn-success btn-small btn-nav" value="Edit" />
+                            </form>
+                        </div>
+                        <div class="col-sm" style="text-align: center">
+                            <form th:action="@{'/recipe/' + ${recipe.id} + '/delete'}" method="get">
+                                <input type="submit" class="btn btn-danger btn-small btn-nav" value="Delete" />
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </td>
         </tr>
         </tbody>

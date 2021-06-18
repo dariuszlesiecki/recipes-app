@@ -11,13 +11,35 @@
 <body>
 <th:block th:fragment="header">
     <div sec:authorize="isAuthenticated()" class="text-center p-3">
-        <a th:href="@{/}">Home</a><br>
-        <a th:href="@{/recipe/add}">Add recipe</a>
-        <a th:href="@{/profile}">My profile</a>
-        <form th:action="@{/logout}" method="post">
-            Welcome <b><span sec:authentication="name">Username</span></b>
-            <input type="submit" value="Logout" />
-        </form>
+        <div style="padding: 1% 5% 1% 5% ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid  clearfix">
+                    <a class="navbar-brand" th:href=@{/}>Home</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse pull-left"  id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" th:href="@{/recipe/add}">Add recipe</a>
+                            <a class="nav-link" th:href="@{/profile}">My profile</a>
+                        </div>
+
+                    </div>
+                    <div class="pull-right">
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn btn-warning btn-small btn-nav" value="Logout" />
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div style="margin-left: 15%; margin-right: 15% ;
+            background-color: darkblue;
+            align-items:center;
+            justify-content:
+            center; border-radius: 10px;" >
+                <h3 style="color: white">Welcome <b><span sec:authentication="name">Username</span></b></h3>
+            </div>
+        </div>
     </div>
 </th:block>
 </body>
