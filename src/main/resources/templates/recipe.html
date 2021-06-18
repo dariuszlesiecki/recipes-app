@@ -7,9 +7,11 @@
     <div>
         <div style="background-color: lightgreen; padding: 2% 25% 2% 25%; border: 2px solid darkblue;
              border-radius: 25px; margin-bottom: 2%">
-            <div><h2>Title</h2></div>
-            <div  th:text="${recipe.title}" ></div>
+
+            <div><h2 th:text="${recipe.title}"></h2></div>
+            <a th:href="@{'/user/' + ${recipe.userId}}" th:text="${recipe.author}"></a>
             <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}" />
+
         </div>
 
     </div>
