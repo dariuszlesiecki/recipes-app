@@ -1,5 +1,6 @@
 package com.wat.recipesapp;
 
+import com.wat.recipesapp.image.ImageUtil;
 import com.wat.recipesapp.recipies.Recipe;
 import com.wat.recipesapp.recipies.RecipeService;
 import com.wat.recipesapp.user.User;
@@ -29,6 +30,7 @@ public class AppController {
     public String homePage(Model model){
         List<Recipe> listRecipes = recipeService.findAll();
         model.addAttribute("listRecipes", listRecipes);
+        model.addAttribute("imgUtil", new ImageUtil());
         return "index";
     }
 
