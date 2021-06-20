@@ -7,30 +7,49 @@
 <div class="container">
     <div class="row pb-4">
         <div class="col-12">
-            <input type="text" name="searchbox" id="searchbox" class="filterinput form-control" placeholder="Search recipe">
+            <input id="term" name="term" placeholder="Search recipe" />
         </div>
     </div>
 
-    <div class="card-group">
-            <div th:each="recipe : ${listRecipes}" class="card" style="width: 18rem; max-width: 18em">
+    <div class="card-deck">
+            <div th:each="recipe : ${listRecipes}" class="card" style="max-width: 30rem;">
                 <div class="card-body">
                     <h5 class="card-title"><a id="recipe-title" th:href="@{'recipe/' + ${recipe.id}}" th:text="${recipe.title}"></a> </h5>
                 </div>
                 <a th:href="@{'recipe/' + ${recipe.id}}">
                     <img class="card-img-top " th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}">
                 </a>
-        </div>
+            </div>
+            <div th:each="recipe : ${listRecipesAPI}" class="card" style="max-width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><a id="recipeAPI-title" th:href="@{'recipeAPI/' + ${recipe.id}}" th:text="${recipe.title}"></a> </h5>
+                </div>
+                <a th:href="@{'recipeAPI/' + ${recipe.id}}">
+                    <img class="card-img-top " th:src="${recipe.image}">
+                </a>
+            </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function() {
-        $("#searchbox").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $('.card').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+
+        $('#term').autocomplete({
+            source : '/search',
+            minLength : 2
         });
+
+        $.fn.randomize = function(childElem) {
+            return this.each(function() {
+                var $this = $(this);
+                var elems = $this.children(childElem);
+                elems.sort(function() { return (Math.round(Math.random())-0.5); });
+                $this.remove(childElem);
+                for(var i=0; i < elems.length; i++)
+                    $this.append(elems[i]);
+            });
+        }
+        $(".card-deck").randomize(".card");
     });
 </script>
 </body>
