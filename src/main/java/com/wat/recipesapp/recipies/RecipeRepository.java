@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findAll();
+    List<Recipe> findAllByTitleContaining(String title);
     List<Recipe> findAllByAuthor(String author);
     List<Recipe> findAllByUserId(Long id);
     Optional<Recipe> findById(Long i);
