@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="fragments :: html_head(pageTitle='Recipes App - Home')" />
+<head th:replace="fragments :: html_head(pageTitle='Recipes App - Home')"/>
 <body>
 <div th:replace="fragments :: header"></div>
 
@@ -11,8 +11,9 @@
         </div>
     </div>
 
-    <div class="card-deck">
-            <div th:each="recipe : ${listRecipes}" class="card" style="max-width: 30rem;">
+    <div id="cards" class="row row-cols-1 row-cols-md-3">
+        <div th:each="recipe : ${listRecipes}" class="col mb-4">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><a id="recipe-title" th:href="@{'recipe/' + ${recipe.id}}" th:text="${recipe.title}"></a> </h5>
                 </div>
@@ -20,7 +21,9 @@
                     <img class="card-img-top " th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(recipe.pic)}">
                 </a>
             </div>
-            <div th:each="recipe : ${listRecipesAPI}" class="card" style="max-width: 30rem;">
+        </div>
+        <div th:each="recipe : ${listRecipesAPI}" class="col mb-4">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><a id="recipeAPI-title" th:href="@{'recipeAPI/' + ${recipe.id}}" th:text="${recipe.title}"></a> </h5>
                 </div>
@@ -28,6 +31,7 @@
                     <img class="card-img-top " th:src="${recipe.image}">
                 </a>
             </div>
+        </div>
     </div>
 </div>
 
@@ -54,7 +58,7 @@
                     $this.append(elems[i]);
             });
         }
-        $(".card-deck").randomize(".card");
+        $("#cards").randomize(".col");
     });
 </script>
 </body>
