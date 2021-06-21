@@ -9,6 +9,18 @@
              border-radius: 25px; margin-bottom: 2%">
 
             <div><h2 th:text="${recipe.title}"></h2></div>
+
+            <div class="container">
+                <div>Average rating: <div th:text="${ratingService.getAverage(recipe.id)}+'/5.0'"></div></div>
+                <form method="post" th:object="${rating}" th:action="'/ratingAPI/'+${recipe.id}+'/add'" class="mt-5">
+
+                    <input id="input-21b" value="4" type="text" class="rating" data-theme="krajee-fas" data-min=0 data-max=5 data-step=0.2 data-size="lg"
+                           required title="" th:field="*{score}">
+
+                    <button class="btn btn-primary" type="submit">Add rating</button>
+                </form>
+            </div>
+
             <img class='img-thumbnail' th:src="${recipe.image}" />
 
         </div>
