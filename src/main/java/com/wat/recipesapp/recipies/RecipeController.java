@@ -79,7 +79,7 @@ public class RecipeController {
         recipeCopy.setDescription(recipe.getDescription());
 
         // Image
-        System.out.println("/save | File Name : "+image.getName());
+        //System.out.println("/save | File Name : "+image.getName());
         byte[] imageBytes = image.getBytes();
         recipeCopy.setPic(imageBytes);
 
