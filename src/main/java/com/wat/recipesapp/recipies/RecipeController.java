@@ -3,6 +3,8 @@ package com.wat.recipesapp.recipies;
 import com.wat.recipesapp.comments.Comment;
 import com.wat.recipesapp.comments.CommentService;
 import com.wat.recipesapp.image.ImageUtil;
+import com.wat.recipesapp.rating.Rating;
+import com.wat.recipesapp.rating.RatingService;
 import com.wat.recipesapp.user.User;
 import com.wat.recipesapp.user.UserService;
 import org.springframework.security.core.Authentication;
@@ -22,11 +24,13 @@ public class RecipeController {
     private final RecipeService recipeService;
     private final UserService userService;
     private final CommentService commentService;
+    private final RatingService ratingService;
 
-    public RecipeController(RecipeService recipeService, UserService userService, CommentService commentService) {
+    public RecipeController(RecipeService recipeService, UserService userService, CommentService commentService, RatingService ratingService) {
         this.recipeService = recipeService;
         this.userService = userService;
         this.commentService = commentService;
+        this.ratingService = ratingService;
     }
 
     @GetMapping("/recipe/add")
@@ -87,7 +91,8 @@ public class RecipeController {
     @RequestMapping("/recipe/{id}")
     public String recipeDetails(Model model,
                                 @PathVariable(name = "id") Long id,
-                                @ModelAttribute Comment comment){
+                                @ModelAttribute Comment comment,
+                                @ModelAttribute Rating rating){
         Recipe recipe = recipeService.findById(id).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("recipe",recipe);
 
@@ -97,6 +102,8 @@ public class RecipeController {
         model.addAttribute("comments",comments);
         model.addAttribute("comment",comment);
         model.addAttribute("imgUtil", new ImageUtil());
+        model.addAttribute("rating", rating);
+        model.addAttribute("ratingService", ratingService);
         return "recipe";
     }
 

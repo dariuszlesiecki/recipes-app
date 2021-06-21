@@ -36,7 +36,12 @@
 
         $('#term').autocomplete({
             source : '/search',
-            minLength : 2
+            minLength : 2,
+            select: function( event, ui ) {
+                event.preventDefault();
+                window.location.href = ui.item.value;
+                $('#term').val(ui.item.label);
+            }
         });
 
         $.fn.randomize = function(childElem) {
