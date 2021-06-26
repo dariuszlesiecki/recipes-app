@@ -9,7 +9,7 @@
         </thead>
         <tbody>
         <tr th:each="recipe : ${listRecipes}">
-            <td th:text="${recipe.title}">Title</td>
+            <td><a th:text="${recipe.title}" th:href="@{'/recipe/'+ ${recipe.id}}"></a></td>
             <td th:text="${recipe.description}">Description</td>
             <td th:text="${recipe.author}">Author</td>
             <td th:if="${canEdit}">

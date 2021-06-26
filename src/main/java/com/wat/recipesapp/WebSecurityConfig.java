@@ -72,8 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                     OAuth2User u = (OAuth2User) authentication.getPrincipal();
                     String email = u.getAttribute("email");
-                    //System.out.println(u.getAttributes());
-                    //System.out.println(email);
                     userService.processOAuthPostLogin(email);
 
                     response.sendRedirect("/");

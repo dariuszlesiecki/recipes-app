@@ -123,7 +123,6 @@ public class AppController {
         List<RecipeAutocomplete> results = new ArrayList<>();
         if(recipes.size() >0 ) results.addAll(recipes.stream().map(e->new RecipeAutocomplete(e.getTitle(),e.getId().toString(),false)).collect(Collectors.toList()));
         if(recipesAPI.length >0) results.addAll(Arrays.stream(recipesAPI).map(e->new RecipeAutocomplete(e.getTitle(),e.getId().toString(),true)).collect(Collectors.toList()));
-        System.out.println(results);
 
         return results;
     }
